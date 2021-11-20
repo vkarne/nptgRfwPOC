@@ -1,0 +1,9 @@
+/.idea/
+/venv/
+/chromedriver.exe
+/log.html
+/output.xml
+/report.html
+/TestSuite/log.html
+/TestSuite/output.xml
+/TestSuite/report.html
