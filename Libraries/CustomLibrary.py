@@ -20,14 +20,14 @@ from appdirs import user_data_dir
 
 class CustomLibrary:
     chrome_profile_path = "D:/Venkanna/chromeProfile"
-    testdata = None
+    test_data = None
 
     def __init__(self):
         pass
 
     @property
     def _sel_lib(self):
-        return BuiltIn().get_library_instance('SeleniumLibrary')
+        return BuiltIn().get_library_instance('Selenium2Library')
 
     @property
     def _driver(self):
@@ -35,7 +35,7 @@ class CustomLibrary:
 
     def open_chrome_browser(self, url):
         """Return the True if Chrome browser opened """
-        selenium = BuiltIn().get_library_instance('SeleniumLibrary')
+        selenium = BuiltIn().get_library_instance('Selenium2Library')
         print(self.get_chrome_profile_path())
         try:
             options = webdriver.ChromeOptions()
@@ -103,29 +103,29 @@ class CustomLibrary:
         self.chrome_profile_path = "D:/Venkanna/chromeProfile"
         return self.chrome_profile_path
 
-    def get_unique_test_data(self, testdata):
+    def get_unique_test_data(self, test_data):
         """Returns the unique if data contains unique word """
         ts = calendar.timegm(time.gmtime())
         unique_string = str(ts)
-        testdata = testdata.replace("UNIQUE", unique_string)
-        testdata = testdata.replace("Unique", unique_string)
-        testdata = testdata.replace("unique", unique_string)
-        return self.testdata
+        test_data = test_data.replace("UNIQUE", unique_string)
+        test_data = test_data.replace("Unique", unique_string)
+        test_data = test_data.replace("unique", unique_string)
+        return self.test_data
 
-    def get_random_number_test_data(self, testdata):
+    def get_random_number_test_data(self, test_data):
         num = ''.join(random.choices(string.digits, k=8))
         randomNumber = str(num)
-        testdata = testdata.replace("RANDOM", randomNumber)
-        testdata = testdata.replace("Random", randomNumber)
-        testdata = testdata.replace("random", randomNumber)
-        return self.testdata
+        test_data = test_data.replace("RANDOM", randomNumber)
+        test_data = test_data.replace("Random", randomNumber)
+        test_data = test_data.replace("random", randomNumber)
+        return self.test_data
 
-    def get_random_name_test_data(self, testdata):
+    def get_random_name_test_data(self, test_data):
         randomText = names.get_full_name()
-        testdata = testdata.replace("RANDOMNAME", randomText)
-        testdata = testdata.replace("RandomName", randomText)
-        testdata = testdata.replace("randomname", randomText)
-        return self.testdata
+        test_data = test_data.replace("RANDOMNAME", randomText)
+        test_data = test_data.replace("RandomName", randomText)
+        test_data = test_data.replace("randomname", randomText)
+        return self.test_data
 
     def wait_until_element_is_present(self, locator, locator_type):
         """ An Expectation for checking that an element is either invisible or not present on the DOM."""
@@ -151,19 +151,19 @@ class CustomLibrary:
             WebDriverWait(self._driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, locator)))
             print("clickable after")
 
-    def app_page_up(self):
+    def press_page_up(self):
         try:
-            element = self._driver.find_element(By.CSS_SELECTOR, '[data-id="tabpanel-tab_9"]')
-            element.send_keys(Keys.PAGE_UP)
+            actions = ActionChains(self._driver)
+            actions.key_up(Keys.PAGE_UP).perform()
             print("Scrolled to Page Up with selected locator")
 
         except Exception as err:
             print(str(err) + "Scrolled to Page Up with locator failed")
 
-    def app_page_down(self):
+    def press_page_down(self):
         try:
-            element = self._driver.find_element(By.CSS_SELECTOR, '[data-id="tabpanel-tab_9"]')
-            element.send_keys(Keys.PAGE_UP)
+            actions = ActionChains(self._driver)
+            actions.key_down(Keys.PAGE_DOWN).perform()
             print("Scrolled to Page down with selected locator")
 
         except Exception as err:
@@ -179,7 +179,7 @@ class CustomLibrary:
     def press_down_arrow(self):
         try:
             actions = ActionChains(self._driver)
-            actions.key_up(Keys.ARROW_DOWN).perform()
+            actions.key_down(Keys.ARROW_DOWN).perform()
         except Exception as e:
             print(str(e) + "Key press not happened")
 

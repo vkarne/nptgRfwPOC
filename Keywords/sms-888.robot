@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Keywords definition of sms-888
+Resource          ../Global/global_variables.robot
 Resource          ../Global/super.robot
 
 *** Keywords ***
@@ -18,51 +19,50 @@ Open Account Details
     wait until element is visible   ${account_name_css}  ${LONG_WAIT}
 
 Verify Account Information
-    page should contain element   ${account_name_css}
-    page should contain element   ${account_type_css}
-    page should contain element   ${parent_account_css}
-    page should contain element   ${managing_distributor_css}
-    page should contain element   ${international_customer_css}
-    page should contain element   ${ownership_css}
-    web Page Down
-    page should contain element   ${site_id_css}
-    page should contain element   ${pin_css}
-    page should contain element   ${priority_css}
-    page should contain element   ${price_list_css}
-    page should contain element   ${comments_css}
-    web Page Down
-    page should contain element   ${automation_source_css}
-    page should contain element   ${website_css}
-    page should contain element   ${email_css}
-    page should contain element   ${main_telephone_css}
-    page should contain element   ${fax_css}
+    Page Should Contain Element   ${account_name_css}
+    Page Should Contain Element   ${account_type_css}
+    Page Should Contain Element   ${parent_account_css}
+    Page Should Contain Element   ${managing_distributor_css}
+    Page Should Contain Element   ${international_customer_css}
+    Page Should Contain Element   ${ownership_css}
+    Page Should Contain Element   ${site_id_css}
+    Page Should Contain Element   ${pin_css}
+    Page Should Contain Element   ${priority_css}
+    scroll element into view    ${physical_address_css}
+    Page Should Contain Element   ${price_list_css}
+    Page Should Contain Element   ${comments_css}
+    Page Should Contain Element   ${automation_source_css}
+    Page Should Contain Element   ${website_css}
+    Page Should Contain Element   ${email_css}
+    Page Should Contain Element   ${main_telephone_css}
+    Page Should Contain Element   ${fax_css}
 
 Verify Address Information
-    web Page Down
-    page should contain element   ${address_street1_css}
-    page should contain element   ${address_street2_css}
-    page should contain element   ${address_city_css}
-    page should contain element   ${address_state_province_css}
-    page should contain element   ${address_zip_code_css}
-    page should contain element   ${address_country_css}
-    page should contain element   ${address_county_css}
+    scroll element into view    ${address_zip_code_css}
+    Page Should Contain Element   ${address_street1_css}
+    Page Should Contain Element   ${address_street2_css}
+    Page Should Contain Element   ${address_city_css}
+    Page Should Contain Element   ${address_state_province_css}
+    Page Should Contain Element   ${address_zip_code_css}
+    Page Should Contain Element   ${address_country_css}
+    Page Should Contain Element   ${address_county_css}
 
 Verify Billing Information
-    page should contain element   ${bill_to_account_css}
-    page should contain element   ${bill_to_erp_css}
+    Page Should Contain Element   ${bill_to_account_css}
+    Page Should Contain Element   ${bill_to_erp_css}
 
 Verify Contact Information
-    page should contain element   ${primary_contact_css}
-    page should contain element   ${maintenance_contract_contact_css}
-    page should contain element   ${rma_po_contact_css}
-    page should contain element   ${ami_service_contact_css}
+    Page Should Contain Element   ${primary_contact_css}
+    Page Should Contain Element   ${maintenance_contract_contact_css}
+    Page Should Contain Element   ${rma_po_contact_css}
+    Page Should Contain Element   ${ami_service_contact_css}
 
 Verify Territory Information
-    page should contain element   ${owner_css}
-    page should contain element   ${region_css}
-    page should contain element   ${district_css}
-    page should contain element   ${territory_css}
-    page should contain element   ${customer_success_specialist_css}
+    Page Should Contain Element   ${owner_css}
+    Page Should Contain Element   ${region_css}
+    Page Should Contain Element   ${district_css}
+    Page Should Contain Element   ${territory_css}
+    Page Should Contain Element   ${customer_success_specialist_css}
 
 Goto Home page
     click element   ${home_link_css}

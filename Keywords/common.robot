@@ -16,12 +16,6 @@ Launch Browser and Navigate to URL
     Maximize Browser Window
     Wait Until Time    2
 
-web page Up
-    app page up
-
-web Page Down
-    app page down
-
 Take Screenshot
     Capture Page Screenshot
 
@@ -33,7 +27,7 @@ Set Browser Position
 
 Create Screenshot Directory
     Run Keyword And Ignore Error    Create Directory    ${EXECDIR}/Screenshots
-    SeleniumLibrary.Set Screenshot Directory    ${EXECDIR}/Screenshots
+    Selenium2Library.Set Screenshot Directory    ${EXECDIR}/Screenshots
 
 Wait Until Element Clickable and Click
     [Arguments]    ${locator}
@@ -59,39 +53,6 @@ Navigate to Menu
     Wait Until Element Is Visible    //span[text()='${sub_menu}']/parent::a    ${LONG_WAIT}    ${sub_menu} is not displayed in ${menu} menu list
     Wait Until Element Clickable and Click    //span[text()='${sub_menu}']
 
-Check message displayed
-    [Arguments]    ${time_out}=15s
-    ${status}=    Run Keyword And Return Status    Wait Until Element Is Visible    ${dialog.error}    ${time_out}    Alert message is not displayed
-    Return From Keyword If    '${status}'=='False'
-    common.Take Screenshot
-    ${err_message}=    Get Text    ${label.dialog.error.msg}
-    Click Button    ${button.error.ok}
-    [Return]    ${err_message}
-
-Close Popup window
-    ${status}=    Run Keyword And Return Status    Wait Until Element Is Visible    ${button.popup.close}    1s
-    Run Keyword If    '${status}'=='True'    Click Element    ${button.popup.close}
-
-Enter text and press tab
-    [Arguments]    ${locator}    ${value}
-    Press Keys    ${locator}    ${value}
-    Press Keys    ${locator}    TAB
-
 Close Browser
-    Run Keyword And Ignore Error    SeleniumLibrary.Close All Browsers
+    Run Keyword And Ignore Error    Selenium2Library.Close All Browsers
 
-Refresh Home page
-    Wait Until Element Is Visible    ${button.home.refresh}    ${SHORT_WAIT}
-    Click Element    ${button.home.refresh}
-    Sleep    10s
-    Click Element    ${button.home.refresh}
-    Sleep    2s
-
-Input And Verify Text
-    [Arguments]    ${locator}    ${value}
-    FOR    ${INDEX}    IN RANGE    1    3
-        Input Text    ${locator}    ${EMPTY}
-        Enter text and press tab    ${locator}    ${value}
-        ${text}=    Get Text    ${locator}
-        Return From Keyword If    '${text}'=='${value}'
-    END
